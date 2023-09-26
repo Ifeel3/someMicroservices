@@ -7,15 +7,15 @@ services:
   #    - auth-ms
   #    - some-ms
 
-  auth-ms:
-    build: auth-ms/
-    depends_on:
-      - db
-
-  # some-ms:
-  #  build: some-ms/
+  #auth-ms:
+  #  build: auth-ms/
   #  depends_on:
   #    - db
+
+  some-ms:
+    build: some-ms/
+    depends_on:
+      - db
 
   db:
     image: postgres:alpine
@@ -24,5 +24,3 @@ services:
       - POSTGRES_PASSWORD=pass1234
     volumes:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
-    ports:
-      - 5432:5432
