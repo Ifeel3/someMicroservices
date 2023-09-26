@@ -1,0 +1,14 @@
+DROP TABLE IF EXISTS auth CASCADE;
+DROP TABLE IF EXISTS items CASCADE;
+
+CREATE TABLE auth (
+    id SERIAL PRIMARY KEY,
+    login VARCHAR(200),
+    hash VARCHAR(200)
+);
+
+CREATE TABLE items (
+    id SERIAL PRIMARY KEY,
+    info TEXT,
+    price BIGINT
+);

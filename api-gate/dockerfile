@@ -1,0 +1,8 @@
+FROM golang:alpine
+ADD src /build/
+WORKDIR /build/
+RUN mkdir /service
+RUN go build -o /service/api-gate .
+WORKDIR /service
+RUN rm -rf /build
+CMD /service/api-gate
