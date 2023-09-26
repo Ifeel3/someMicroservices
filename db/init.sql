@@ -2,14 +2,16 @@ DROP TABLE IF EXISTS auth CASCADE;
 DROP TABLE IF EXISTS items CASCADE;
 
 CREATE TABLE auth (
-    id SERIAL PRIMARY KEY,
-    login VARCHAR(200),
-    hash VARCHAR(200)
+	id SERIAL PRIMARY KEY,
+	login VARCHAR(200),
+	pass VARCHAR(200),
+	token VARCHAR(200),
+	date BIGINT
 );
 
 CREATE TABLE items (
-    id SERIAL PRIMARY KEY,
-    info TEXT,
-    price BIGINT,
-    owner VARCHAR(200)
+	id SERIAL PRIMARY KEY,
+	info TEXT,
+	price BIGINT,
+	owner VARCHAR(200)
 );
