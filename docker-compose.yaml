@@ -11,10 +11,8 @@ services:
     build: auth-ms/
     depends_on:
       - db
-    ports:
-      - 8081:8081
-  
-  #some-ms:
+
+  # some-ms:
   #  build: some-ms/
   #  depends_on:
   #    - db
@@ -26,3 +24,5 @@ services:
       - POSTGRES_PASSWORD=pass1234
     volumes:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 5432:5432

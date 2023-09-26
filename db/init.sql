@@ -10,5 +10,6 @@ CREATE TABLE auth (
 CREATE TABLE items (
     id SERIAL PRIMARY KEY,
     info TEXT,
-    price BIGINT
+    price BIGINT,
+    owner VARCHAR(200)
 );

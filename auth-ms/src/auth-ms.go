@@ -13,9 +13,9 @@ import (
 )
 
 type Login struct {
-	Id    int
 	Login string
 	Hash  string
+	Date  int64
 }
 
 type Status struct {
@@ -38,7 +38,7 @@ func addLogin(w http.ResponseWriter, r *http.Request) {
 		return
 	} else {
 		var ans Login
-		err := conn.QueryRow(context.TODO(), "select id, login, hash from auth where login=$1", str[3]).Scan(&ans.Id, &ans.Login, &ans.Hash)
+		err := conn.QueryRow(context.TODO(), "select login, hash from auth where login=$1", str[3]).Scan(&ans.Login, &ans.Hash)
 		if err == nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(Status{"Error", "Login already created"})
@@ -72,7 +72,7 @@ func getLogin(w http.ResponseWriter, r *http.Request) {
 		return
 	} else {
 		var ans Login
-		err := conn.QueryRow(context.TODO(), "select id, login, hash from auth where login=$1", str[3]).Scan(&ans.Id, &ans.Login, &ans.Hash)
+		err := conn.QueryRow(context.TODO(), "select login, hash from auth where login=$1", str[3]).Scan(&ans.Login, &ans.Hash)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(Status{"Error", "Login not found"})
@@ -125,7 +125,7 @@ func updLogin(w http.ResponseWriter, r *http.Request) {
 		return
 	} else {
 		var ans Login
-		err := conn.QueryRow(context.TODO(), "select id, login, hash from auth where login=$1", str[3]).Scan(&ans.Id, &ans.Login, &ans.Hash)
+		err := conn.QueryRow(context.TODO(), "select login, hash from auth where login=$1", str[3]).Scan(&ans.Login, &ans.Hash)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(Status{"Error", "Login not found"})
