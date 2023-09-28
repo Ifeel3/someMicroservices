@@ -2,7 +2,7 @@ FROM golang:alpine
 ADD service /build/
 WORKDIR /build/
 RUN mkdir /service
-RUN go get github.com/jackc/pgx/v5
+RUN go get github.com/jackc/pgx/v5/pgxpool
 RUN go build -o /service/auth-ms .
 WORKDIR /service
 RUN rm -rf /build
