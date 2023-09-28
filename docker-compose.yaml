@@ -7,17 +7,20 @@ services:
   #    - auth-ms
   #    - some-ms
 
-  #auth-ms:
-  #  build: auth-ms/
-  #  depends_on:
-  #    - db
-  #  restart: always
-
-  some-ms:
-    build: some-ms/
+  auth-ms:
+    build: auth-ms/
     depends_on:
       - db
     restart: always
+    ports:
+      - 8081:8081
+
+  #some-ms:
+  #  build: some-ms/
+  #  depends_on:
+  #    - db
+  #  restart: always
+  #  ports:
 
   db:
     image: postgres:alpine

@@ -1,5 +1,5 @@
 FROM golang:alpine
-ADD src /build/
+ADD service /build/
 WORKDIR /build/
 RUN mkdir /service
 RUN go build -o /service/some-ms .
