@@ -7,11 +7,11 @@ services:
   #    - auth-ms
   #    - some-ms
 
-  auth-ms:
-    build: auth-ms/
-    depends_on:
-      - db
-    restart: always
+  #auth-ms:
+  #  build: auth-ms/
+  #  depends_on:
+  #    - db
+  #  restart: always
 
   some-ms:
     build: some-ms/
