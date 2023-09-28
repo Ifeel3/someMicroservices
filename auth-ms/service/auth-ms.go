@@ -10,7 +10,7 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-var addr string = "postgres://postgres:pass1234@db:5432/postgres"
+var addr string = "postgres://postgres:pass1234@localhost:5432/postgres"
 
 var conn *pgxpool.Pool
 var connErr error

@@ -12,15 +12,12 @@ services:
     depends_on:
       - db
     restart: always
-    ports:
-      - 8081:8081
 
-  #some-ms:
-  #  build: some-ms/
-  #  depends_on:
-  #    - db
-  #  restart: always
-  #  ports:
+  some-ms:
+    build: some-ms/
+    depends_on:
+      - db
+    restart: always
 
   db:
     image: postgres:alpine

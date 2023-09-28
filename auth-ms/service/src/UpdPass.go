@@ -42,7 +42,7 @@ func UpdPass(w http.ResponseWriter, r *http.Request, conn *pgxpool.Pool) {
 			json.NewEncoder(w).Encode([]any{StatusStruct{Status: "Error", StatusInfo: "Bad request"}})
 			return
 		} else {
-			w.WriteHeader(http.StatusAccepted)
+			w.WriteHeader(http.StatusOK)
 			json.NewEncoder(w).Encode([]any{StatusStruct{Status: "OK"}})
 		}
 	}
