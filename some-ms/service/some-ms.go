@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"net/http"
 	. "some-ms/src"
-	. "some-ms/src/structs"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 )
@@ -17,8 +16,8 @@ var connErr error
 
 func RequestHandler(w http.ResponseWriter, r *http.Request) {
 	if connErr != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode([]any{StatusStruct{Status: "Error", StatusInfo: "Database not connected"}})
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode("Database not connected")
 		return
 	}
 	switch r.Method {
@@ -32,7 +31,7 @@ func RequestHandler(w http.ResponseWriter, r *http.Request) {
 		DelItem(w, r, conn)
 	default:
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode([]any{StatusStruct{Status: "Error", StatusInfo: "Bad request"}})
+		json.NewEncoder(w).Encode("Bad request")
 	}
 }
 

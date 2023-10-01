@@ -2,7 +2,6 @@ package main
 
 import (
 	. "auth-ms/src"
-	. "auth-ms/src/structs"
 	"context"
 	"encoding/json"
 	"net/http"
@@ -10,15 +9,15 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-var addr string = "postgres://postgres:pass1234@localhost:5432/postgres"
+var addr string = "postgres://postgres:pass1234@db:5432/postgres"
 
 var conn *pgxpool.Pool
 var connErr error
 
 func loginHandler(w http.ResponseWriter, r *http.Request) {
 	if connErr != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode([]any{StatusStruct{Status: "Error", StatusInfo: "Database not connected"}})
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode("Database not connected")
 		return
 	}
 	switch r.Method {
@@ -32,14 +31,14 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 		CheckAuth(w, r, conn)
 	default:
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode([]any{StatusStruct{Status: "Error", StatusInfo: "Bad request"}})
+		json.NewEncoder(w).Encode("Bad request")
 	}
 }
 
 func tokenHandler(w http.ResponseWriter, r *http.Request) {
 	if connErr != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode([]any{StatusStruct{Status: "Error", StatusInfo: "Database not connected"}})
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode("Database not connected")
 		return
 	}
 	switch r.Method {
@@ -49,7 +48,7 @@ func tokenHandler(w http.ResponseWriter, r *http.Request) {
 		CheckToken(w, r, conn)
 	default:
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode([]any{StatusStruct{Status: "Error", StatusInfo: "Bad request"}})
+		json.NewEncoder(w).Encode("Bad request")
 	}
 }
 

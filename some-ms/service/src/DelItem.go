@@ -14,18 +14,18 @@ func DelItem(w http.ResponseWriter, r *http.Request, conn *pgxpool.Pool) {
 	str := strings.Split(r.RequestURI, "/")
 	if str[3] == "" {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode([]any{StatusStruct{Status: "Error", StatusInfo: "Wrong id"}})
+		json.NewEncoder(w).Encode("Wrong id")
 		return
 	} else {
 		var item ItemStruct
 		err := conn.QueryRow(context.TODO(), "delete from items where id=$1 returning id, info, price, owner", str[3]).Scan(&item.Id, &item.Info, &item.Price, &item.Owner)
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			json.NewEncoder(w).Encode([]any{StatusStruct{Status: "Error", StatusInfo: "Item nor found"}})
+			w.WriteHeader(http.StatusNotFound)
+			json.NewEncoder(w).Encode("Item not found")
 			return
 		} else {
 			w.WriteHeader(http.StatusOK)
-			json.NewEncoder(w).Encode([]any{StatusStruct{Status: "OK"}, item})
+			json.NewEncoder(w).Encode(item)
 		}
 	}
 }

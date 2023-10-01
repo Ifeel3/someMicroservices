@@ -1,11 +1,11 @@
 services:
-  #api-gate:
-  #  build: api-gate/
-  #  ports:
-  #    - 8080:8080
-  #  depends_on:
-  #    - auth-ms
-  #    - some-ms
+ # api-gate:
+ #   build: api-gate/
+ #   ports:
+ #     - 8080:8080
+ #   depends_on:
+ #    - auth-ms
+ #    - some-ms
 
   auth-ms:
     build: auth-ms/
