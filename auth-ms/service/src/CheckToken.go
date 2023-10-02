@@ -41,6 +41,6 @@ func CheckToken(w http.ResponseWriter, r *http.Request, conn *pgxpool.Pool) {
 		json.NewEncoder(w).Encode("Token expired")
 		return
 	} else {
-		w.WriteHeader(http.StatusBadRequest)
+		w.WriteHeader(http.StatusOK)
 	}
 }

@@ -5,8 +5,8 @@ import (
 	"net/http"
 )
 
-var someAddr string = "http://localhost:8082"
-var authAddr string = "http://localhost:8081"
+var someAddr string = "http://some-ms:8082"
+var authAddr string = "http://auth-ms:8081"
 
 func AuthHandlerWrap(w http.ResponseWriter, r *http.Request) {
 	AuthHandler(w, r, authAddr)

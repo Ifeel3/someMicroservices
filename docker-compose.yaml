@@ -1,27 +1,23 @@
 services:
- # api-gate:
- #   build: api-gate/
- #   ports:
- #     - 8080:8080
- #   depends_on:
- #    - auth-ms
- #    - some-ms
+  api-gate:
+    build: api-gate/
+    ports:
+      - 8080:8080
+    depends_on:
+     - auth-ms
+     - some-ms
 
   auth-ms:
     build: auth-ms/
     depends_on:
       - db
     restart: always
-    ports:
-      - 8081:8081
 
   some-ms:
     build: some-ms/
     depends_on:
       - db
     restart: always
-    ports:
-      - 8082:8082
 
   db:
     image: postgres:alpine
